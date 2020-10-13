@@ -9,9 +9,9 @@ import {
 	CardHeader,
 	CardContent,
 	Button,
-	// IconButton,
+	IconButton,
 } from "@material-ui/core";
-// import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { DateRangePicker } from "@matharumanpreet00/react-daterange-picker";
 import { makeStyles } from "@material-ui/core/styles";
 // Data
@@ -203,6 +203,11 @@ const Dashboard = () => {
 						<Card>
 							<CardHeader
 								title={<Typography variant="h6">Sentiments</Typography>}
+								action={
+									<IconButton aria-label="settings">
+										<MoreVertIcon />
+									</IconButton>
+								}
 							/>
 							<CardContent>
 								<Pie
@@ -221,6 +226,11 @@ const Dashboard = () => {
 						<Card>
 							<CardHeader
 								title={<Typography variant="h6">Share Comments</Typography>}
+								action={
+									<IconButton aria-label="settings">
+										<MoreVertIcon />
+									</IconButton>
+								}
 							/>
 
 							<CardContent>
@@ -240,6 +250,11 @@ const Dashboard = () => {
 						<Card>
 							<CardHeader
 								title={<Typography variant="h6">BuzzWords</Typography>}
+								action={
+									<IconButton aria-label="settings">
+										<MoreVertIcon />
+									</IconButton>
+								}
 							/>
 							<CardContent>
 								<Grid container>
@@ -276,6 +291,11 @@ const Dashboard = () => {
 							<CardHeader
 								disableTypography
 								title={<Typography variant="h6">Product Buzz</Typography>}
+								action={
+									<IconButton aria-label="settings">
+										<MoreVertIcon />
+									</IconButton>
+								}
 							/>
 
 							<CardContent>
@@ -299,6 +319,11 @@ const Dashboard = () => {
 						<Card>
 							<CardHeader
 								title={<Typography variant="h6">Sentiments</Typography>}
+								action={
+									<IconButton aria-label="settings">
+										<MoreVertIcon />
+									</IconButton>
+								}
 							/>
 							<CardContent>
 								<Grid container spacing={2}>
