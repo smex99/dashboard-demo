@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { uniq } from "lodash";
 import { Doughnut, Line, Pie } from "react-chartjs-2";
+import { makeStyles } from "@material-ui/core/styles";
 import {
 	Container,
 	Grid,
@@ -8,12 +9,11 @@ import {
 	Card,
 	CardHeader,
 	CardContent,
-	Button,
 	IconButton,
+	TextField,
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { DateRangePicker } from "@matharumanpreet00/react-daterange-picker";
-import { makeStyles } from "@material-ui/core/styles";
+import { DateRangePicker, DateRangeDelimiter } from "@material-ui/pickers";
 // Data
 import { sentiment } from "../data/general_sentiment_data";
 import { product } from "../data/all_products_data";
@@ -185,21 +185,18 @@ const Dashboard = () => {
 	const [shareComments, setShareComments] = useState({});
 	const [productSentiment, setProductSentiment] = useState({});
 
-	const [open, setOpen] = useState(false);
-	const [dateRange, setDateRange] = useState({});
+	const [value, setValue] = useState([null, null]);
 
 	const classes = useStyles();
 
-	const toggleDatepicker = () => setOpen(!open);
-
 	return (
 		<div className={classes.root}>
-			<Container maxWidth="xl" className={classes.container}>
+			<Container maxWidth="lg" disableGutters>
 				<Typography variant="h6" gutterBottom>
 					Last 7 days: Summary
 				</Typography>
-				<Grid container spacing={2}>
-					<Grid item md={4} sm={12}>
+				<Grid container spacing={1}>
+					<Grid item md={4} sm={12} xs={12}>
 						<Card>
 							<CardHeader
 								title={<Typography variant="h6">Sentiments</Typography>}
@@ -222,7 +219,7 @@ const Dashboard = () => {
 						</Card>
 					</Grid>
 
-					<Grid item md={4} sm={12}>
+					<Grid item md={4} sm={12} xs={12}>
 						<Card>
 							<CardHeader
 								title={<Typography variant="h6">Share Comments</Typography>}
@@ -246,7 +243,7 @@ const Dashboard = () => {
 						</Card>
 					</Grid>
 
-					<Grid item md={4} sm={12}>
+					<Grid item md={4} sm={12} xs={12}>
 						<Card>
 							<CardHeader
 								title={<Typography variant="h6">BuzzWords</Typography>}
@@ -266,9 +263,7 @@ const Dashboard = () => {
 												key={word.text}
 												style={{
 													color: word.color,
-													paddingTop:
-														(Math.random() * 100).toFixed().toString() + "px",
-													fontWeight: (parseInt(word.weight) * 100).toString(),
+													fontWeight: (parseInt(word.weight) * 80).toString(),
 													fontSize:
 														(parseInt(word.weight) * 8).toString() + "px",
 												}}
@@ -282,10 +277,8 @@ const Dashboard = () => {
 						</Card>
 					</Grid>
 				</Grid>
-			</Container>
 
-			<Container maxWidth="xl" className={classes.container}>
-				<Grid container spacing={2}>
+				<Grid container spacing={1}>
 					<Grid item md={5} sm={12}>
 						<Card>
 							<CardHeader
@@ -299,7 +292,7 @@ const Dashboard = () => {
 							/>
 
 							<CardContent>
-								<Grid container spacing={2}>
+								<Grid container spacing={1}>
 									{product.map((item) => {
 										return (
 											<Grid item key={item.uuid}>
@@ -326,44 +319,47 @@ const Dashboard = () => {
 								}
 							/>
 							<CardContent>
-								<Grid container spacing={2}>
-									<Grid item md={12} sm={12}>
-										<Button
-											color="primary"
-											variant="contained"
-											onClick={() => toggleDatepicker()}
-										>
-											{open ? "Close" : "Date range"}
-										</Button>
-
+								<Grid container spacing={1}>
+									<Grid item lg={12} md={12} sm={12} justify>
 										<DateRangePicker
-											open={open}
-											onChange={(range) => setDateRange(range)}
+											startText="Start"
+											endText="End"
+											displayStaticWrapperAs="Mobile"
+											value={value}
+											onChange={(newValue) => setValue(newValue)}
+											renderInput={(startProps, endProps) => (
+												<>
+													<TextField margin="dense" {...startProps} />
+													<DateRangeDelimiter> to </DateRangeDelimiter>
+													<TextField margin="dense" {...endProps} />
+												</>
+											)}
 										/>
+									</Grid>
 
-										<div style={{ marginTop: "1rem" }}>
-											<Line
-												data={productSentiment}
-												options={{
-													scales: {
-														xAxes: [
-															{
-																type: "time",
-																distribution: "series",
-																time: {
-																	unit: "week",
-																	tooltipFormat: "lll",
-																},
-																ticks: {
-																	max: dateRange.endDate,
-																	min: dateRange.startDate,
-																},
+									<Grid item lg={12} md={12} sm={12}>
+										<Line
+											data={productSentiment}
+											options={{
+												scales: {
+													maintainAspectRatio: true,
+													xAxes: [
+														{
+															type: "time",
+															distribution: "series",
+															time: {
+																unit: "week",
+																tooltipFormat: "lll",
 															},
-														],
-													},
-												}}
-											/>
-										</div>
+															ticks: {
+																max: value[0],
+																min: value[1],
+															},
+														},
+													],
+												},
+											}}
+										/>
 									</Grid>
 								</Grid>
 							</CardContent>
