@@ -5,9 +5,8 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		// flexGrow: 1,
+		display: "flex",
 		marginBottom: "1rem",
-		padding: "0px",
 	},
 	title: {
 		flexGrow: 1,
