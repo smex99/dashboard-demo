@@ -1,17 +1,13 @@
 import React from "react";
 import Dashboard from "./views/Dashboard";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import { AppBar, Toolbar, Container, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		// flexGrow: 1,
 		marginBottom: "1rem",
-	},
-	menuButton: {
-		marginRight: theme.spacing(2),
+		padding: "0px",
 	},
 	title: {
 		flexGrow: 1,
