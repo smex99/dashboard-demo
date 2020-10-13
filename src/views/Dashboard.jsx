@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { uniq } from "lodash";
-import { Doughnut } from "react-chartjs-2";
-import { Line } from "react-chartjs-2";
+import { Doughnut, Line, Pie } from "react-chartjs-2";
 import {
 	Container,
 	Grid,
@@ -13,6 +12,7 @@ import {
 	// IconButton,
 } from "@material-ui/core";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { DateRangePicker } from "@matharumanpreet00/react-daterange-picker";
 import { makeStyles } from "@material-ui/core/styles";
 // Data
 import { sentiment } from "../data/general_sentiment_data";
@@ -21,8 +21,6 @@ import { product as productS } from "../data/product_sentiment_data";
 import { buzzWord } from "../data/buzz_words_data";
 // Components
 import ProductBuzz from "../components/ProductBuzz";
-
-import { DateRangePicker } from "@matharumanpreet00/react-daterange-picker";
 
 /* Adapt sentiments from API **/
 const sentimentAdapter = (sentiments) => {
@@ -207,7 +205,7 @@ const Dashboard = () => {
 								title={<Typography variant="h6">Sentiments</Typography>}
 							/>
 							<CardContent>
-								<Doughnut
+								<Pie
 									data={generalSentiment}
 									options={{
 										legend: {
