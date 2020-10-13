@@ -342,7 +342,6 @@ const Dashboard = () => {
 											data={productSentiment}
 											options={{
 												scales: {
-													maintainAspectRatio: true,
 													xAxes: [
 														{
 															type: "time",
