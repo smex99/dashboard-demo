@@ -171,12 +171,8 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
 	},
-	card: {
-		maxWidth: 345,
-	},
-	paper: {
-		padding: theme.spacing(2),
-		color: theme.palette.text.secondary,
+	container: {
+		marginBottom: "1rem",
 	},
 }));
 
@@ -199,95 +195,107 @@ const Dashboard = () => {
 	const toggleDatepicker = () => setOpen(!open);
 
 	return (
-		<Container maxWidth="xl">
-			<div className={classes.root}>
-				<Grid container spacing={2} alignContent="center">
-					<Grid item md={4} sm={12}>
-						<Card>
-							<CardHeader
-								title={<Typography>Sentiment</Typography>}
-								action={
-									<IconButton aria-label="settings">
-										<MoreVertIcon />
-									</IconButton>
-								}
-							/>
-							<CardContent>
-								<Doughnut
-									data={generalSentiment}
-									options={{
-										legend: {
-											display: false,
-										},
-									}}
-								/>
-							</CardContent>
-						</Card>
-					</Grid>
-
-					<Grid item md={4} sm={12}>
-						<Card>
-							<CardHeader
-								title={<Typography>Share Comments</Typography>}
-								action={
-									<IconButton aria-label="settings">
-										<MoreVertIcon />
-									</IconButton>
-								}
-							/>
-
-							<CardContent>
-								<Doughnut
-									data={shareComments}
-									options={{
-										legend: {
-											display: false,
-										},
-									}}
-								/>
-							</CardContent>
-						</Card>
-					</Grid>
-
-					<Grid item md={4} sm={12}>
-						<Card>
-							<CardHeader
-								title={<Typography>BuzzWords</Typography>}
-								action={
-									<IconButton aria-label="settings">
-										<MoreVertIcon />
-									</IconButton>
-								}
-							/>
-							<CardContent>
-								<Grid container justify="space-between">
-									{buzzWord.map((word) => {
-										return (
-											<Grid
-												item
-												key={word.text}
-												style={{
-													paddingTop:
-														(Math.random() * 40).toFixed().toString() + "px",
-													color: word.color,
-													fontWeight: (parseInt(word.weight) * 100).toString(),
-													fontSize:
-														(parseInt(word.weight) * 8).toString() + "px",
-													position: "relative",
-												}}
-											>
-												{word.text}
-											</Grid>
-										);
-									})}
-								</Grid>
-							</CardContent>
-						</Card>
-					</Grid>
-				</Grid>
-
+		<div className={classes.root}>
+			<Container className={classes.container}>
 				<Grid container spacing={2}>
-					<Grid item md={6} sm={12}>
+					<Card>
+						<CardHeader title={<Typography>Last 7 days: Summary</Typography>} />
+						<CardContent>
+							<Grid container spacing={2} alignContent="center">
+								<Grid item md={4} sm={12}>
+									<Card>
+										<CardHeader
+											title={<Typography>Sentiment</Typography>}
+											action={
+												<IconButton aria-label="settings">
+													<MoreVertIcon />
+												</IconButton>
+											}
+										/>
+										<CardContent>
+											<Doughnut
+												data={generalSentiment}
+												options={{
+													legend: {
+														display: false,
+													},
+												}}
+											/>
+										</CardContent>
+									</Card>
+								</Grid>
+
+								<Grid item md={4} sm={12}>
+									<Card>
+										<CardHeader
+											title={<Typography>Share Comments</Typography>}
+											action={
+												<IconButton aria-label="settings">
+													<MoreVertIcon />
+												</IconButton>
+											}
+										/>
+
+										<CardContent>
+											<Doughnut
+												data={shareComments}
+												options={{
+													legend: {
+														display: false,
+													},
+												}}
+											/>
+										</CardContent>
+									</Card>
+								</Grid>
+
+								<Grid item md={4} sm={12}>
+									<Card>
+										<CardHeader
+											title={<Typography>BuzzWords</Typography>}
+											action={
+												<IconButton aria-label="settings">
+													<MoreVertIcon />
+												</IconButton>
+											}
+										/>
+										<CardContent>
+											<Grid container justify="space-between">
+												{buzzWord.map((word) => {
+													return (
+														<Grid
+															item
+															key={word.text}
+															style={{
+																paddingTop:
+																	(Math.random() * 30).toFixed().toString() +
+																	"px",
+																color: word.color,
+																fontWeight: (
+																	parseInt(word.weight) * 100
+																).toString(),
+																fontSize:
+																	(parseInt(word.weight) * 8).toString() + "px",
+																position: "relative",
+															}}
+														>
+															{word.text}
+														</Grid>
+													);
+												})}
+											</Grid>
+										</CardContent>
+									</Card>
+								</Grid>
+							</Grid>
+						</CardContent>
+					</Card>
+				</Grid>
+			</Container>
+
+			<Container className={classes.container}>
+				<Grid container spacing={2}>
+					<Grid item md={5} sm={12}>
 						<Card>
 							<CardHeader
 								disableTypography
@@ -300,7 +308,7 @@ const Dashboard = () => {
 							/>
 
 							<CardContent>
-								<Grid container spacing={3}>
+								<Grid container spacing={2}>
 									{product.map((item) => {
 										return (
 											<Grid item key={item.uuid}>
@@ -316,7 +324,7 @@ const Dashboard = () => {
 						</Card>
 					</Grid>
 
-					<Grid item md={6} sm={12}>
+					<Grid item md={7} sm={12}>
 						<Card>
 							<CardHeader
 								title={<Typography>Sentiments</Typography>}
@@ -371,8 +379,8 @@ const Dashboard = () => {
 						</Card>
 					</Grid>
 				</Grid>
-			</div>
-		</Container>
+			</Container>
+		</div>
 	);
 };
 
