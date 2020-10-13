@@ -9,10 +9,10 @@ import {
 	Card,
 	CardHeader,
 	CardContent,
-	IconButton,
 	Button,
+	// IconButton,
 } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+// import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { makeStyles } from "@material-ui/core/styles";
 // Data
 import { sentiment } from "../data/general_sentiment_data";
@@ -196,115 +196,88 @@ const Dashboard = () => {
 
 	return (
 		<div className={classes.root}>
-			<Container className={classes.container}>
+			<Container maxWidth="xl" className={classes.container}>
+				<Typography variant="h6" gutterBottom>
+					Last 7 days: Summary
+				</Typography>
 				<Grid container spacing={2}>
-					<Card>
-						<CardHeader title={<Typography>Last 7 days: Summary</Typography>} />
-						<CardContent>
-							<Grid container spacing={2} alignContent="center">
-								<Grid item md={4} sm={12}>
-									<Card>
-										<CardHeader
-											title={<Typography>Sentiment</Typography>}
-											action={
-												<IconButton aria-label="settings">
-													<MoreVertIcon />
-												</IconButton>
-											}
-										/>
-										<CardContent>
-											<Doughnut
-												data={generalSentiment}
-												options={{
-													legend: {
-														display: false,
-													},
+					<Grid item md={4} sm={12}>
+						<Card>
+							<CardHeader
+								title={<Typography variant="h6">Sentiments</Typography>}
+							/>
+							<CardContent>
+								<Doughnut
+									data={generalSentiment}
+									options={{
+										legend: {
+											display: false,
+										},
+									}}
+								/>
+							</CardContent>
+						</Card>
+					</Grid>
+
+					<Grid item md={4} sm={12}>
+						<Card>
+							<CardHeader
+								title={<Typography variant="h6">Share Comments</Typography>}
+							/>
+
+							<CardContent>
+								<Doughnut
+									data={shareComments}
+									options={{
+										legend: {
+											display: false,
+										},
+									}}
+								/>
+							</CardContent>
+						</Card>
+					</Grid>
+
+					<Grid item md={4} sm={12}>
+						<Card>
+							<CardHeader
+								title={<Typography variant="h6">BuzzWords</Typography>}
+							/>
+							<CardContent>
+								<Grid container>
+									{buzzWord.map((word) => {
+										return (
+											<Grid
+												item
+												component="div"
+												key={word.text}
+												style={{
+													color: word.color,
+													paddingTop:
+														(Math.random() * 100).toFixed().toString() + "px",
+													fontWeight: (parseInt(word.weight) * 100).toString(),
+													fontSize:
+														(parseInt(word.weight) * 8).toString() + "px",
 												}}
-											/>
-										</CardContent>
-									</Card>
-								</Grid>
-
-								<Grid item md={4} sm={12}>
-									<Card>
-										<CardHeader
-											title={<Typography>Share Comments</Typography>}
-											action={
-												<IconButton aria-label="settings">
-													<MoreVertIcon />
-												</IconButton>
-											}
-										/>
-
-										<CardContent>
-											<Doughnut
-												data={shareComments}
-												options={{
-													legend: {
-														display: false,
-													},
-												}}
-											/>
-										</CardContent>
-									</Card>
-								</Grid>
-
-								<Grid item md={4} sm={12}>
-									<Card>
-										<CardHeader
-											title={<Typography>BuzzWords</Typography>}
-											action={
-												<IconButton aria-label="settings">
-													<MoreVertIcon />
-												</IconButton>
-											}
-										/>
-										<CardContent>
-											<Grid container justify="space-between">
-												{buzzWord.map((word) => {
-													return (
-														<Grid
-															item
-															key={word.text}
-															style={{
-																paddingTop:
-																	(Math.random() * 30).toFixed().toString() +
-																	"px",
-																color: word.color,
-																fontWeight: (
-																	parseInt(word.weight) * 100
-																).toString(),
-																fontSize:
-																	(parseInt(word.weight) * 8).toString() + "px",
-																position: "relative",
-															}}
-														>
-															{word.text}
-														</Grid>
-													);
-												})}
+											>
+												{word.text}
 											</Grid>
-										</CardContent>
-									</Card>
+										);
+									})}
 								</Grid>
-							</Grid>
-						</CardContent>
-					</Card>
+							</CardContent>
+						</Card>
+					</Grid>
 				</Grid>
 			</Container>
 
-			<Container className={classes.container}>
+			<Container maxWidth="xl" className={classes.container}>
 				<Grid container spacing={2}>
 					<Grid item md={5} sm={12}>
 						<Card>
 							<CardHeader
 								disableTypography
-								title={<Typography>Product Buzz</Typography>}
-								action={
-									<IconButton aria-label="settings">
-										<MoreVertIcon />
-									</IconButton>
-								}
+								title={<Typography variant="h6">Product Buzz</Typography>}
 							/>
 
 							<CardContent>
@@ -327,12 +300,7 @@ const Dashboard = () => {
 					<Grid item md={7} sm={12}>
 						<Card>
 							<CardHeader
-								title={<Typography>Sentiments</Typography>}
-								action={
-									<IconButton aria-label="settings">
-										<MoreVertIcon />
-									</IconButton>
-								}
+								title={<Typography variant="h6">Sentiments</Typography>}
 							/>
 							<CardContent>
 								<Grid container spacing={2}>
