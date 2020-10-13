@@ -18,7 +18,7 @@ function App() {
 
 	return (
 		<>
-			<div className={classes.root}>
+			<div className="navbar">
 				<AppBar position="static">
 					<Toolbar>
 						<Typography className={classes.title}>
